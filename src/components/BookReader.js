@@ -2042,6 +2042,7 @@ BookReader.prototype.leftmost = function() {
 // next()
 //______________________________________________________________________________
 BookReader.prototype.next = function() {
+    ga('send', 'event', 'book', 'page', 'next');
     if (2 == this.mode) {
         this.autoStop();
         this.flipFwdToIndex(null);
@@ -2055,6 +2056,7 @@ BookReader.prototype.next = function() {
 // prev()
 //______________________________________________________________________________
 BookReader.prototype.prev = function() {
+    ga('send', 'event', 'book', 'page', 'prev');
     if (2 == this.mode) {
         this.autoStop();
         this.flipBackToIndex(null);
@@ -2066,10 +2068,12 @@ BookReader.prototype.prev = function() {
 }
 
 BookReader.prototype.first = function() {
+    ga('send', 'event', 'book', 'page', 'first');
     this.jumpToIndex(this.firstDisplayableIndex());
 }
 
 BookReader.prototype.last = function() {
+    ga('send', 'event', 'book', 'page', 'last');
     this.jumpToIndex(this.lastDisplayableIndex());
 }
 
@@ -2796,6 +2800,12 @@ BookReader.prototype.customSearch = function (endpoint) {
   // Build the URL to the search endpoint using the registered method
   var url = endpoint.call(this, query);
   console.log('customSearch', url);
+
+  // don't log initial search
+  if (this.searchesCount > 0) {
+      ga('send', 'event', 'book', 'search');
+  }
+  this.searchesCount++;
 
   var self = this;
 
