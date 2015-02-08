@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bookreader', ['ngResource', 'ngRoute'])
+angular.module('bookreader', ['ngResource', 'ngRoute', 'angular-loading-bar'])
   .config(function ($routeProvider) {
     $routeProvider
       .otherwise({
