@@ -3567,15 +3567,14 @@ BookReader.prototype.addSearchResult = function(queryString, pageIndex) {
         centerPointY: 0,
         shadow: false
     })
-    .hover( function() {
-                // remove from other markers then turn on just for this
-                // XXX should be done when nav slider moves
-                $('.search,.chapter').removeClass('front');
-                $(this).addClass('front');
-            }, function() {
-                $(this).removeClass('front');
-            }
-    )
+    .hover(function() {
+        // remove from other markers then turn on just for this
+        // XXX should be done when nav slider moves
+        $('.search,.chapter').removeClass('front');
+        $(this).addClass('front');
+    }, function() {
+        $(this).removeClass('front');
+    })
     .bind('click', function() {
         $(this).data('self').jumpToIndex($(this).data('pageIndex'));
     });
