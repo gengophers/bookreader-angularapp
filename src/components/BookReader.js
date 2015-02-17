@@ -1105,6 +1105,10 @@ BookReader.prototype.onePageCalculateViewDimensions = function(reduce, padding) 
         var width = parseInt(this._getPageWidth(i)/this.reduce);
         if (width>viewWidth) viewWidth=width;
     }
+    // add extra padding after the last page
+    if (this.numLeafs > 0) {
+        viewHeight += this.padding;
+    }
     return { width: viewWidth, height: viewHeight }
 }
 

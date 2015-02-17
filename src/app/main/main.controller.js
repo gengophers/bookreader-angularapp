@@ -21,35 +21,35 @@ angular.module('bookreader')
     $scope.br = br;
 
     // DWQ I have no idea why getPageHeight is called with invalid page numbers, but it is
-    var clamp = function(index, pageDims) {
+    var clamp = function(index, numPages) {
       if (index < 0 || index == null || isNaN(index)) {
         index = 0;
       }
-      else if (index >= pageDims.length) {
-        index = pageDims.length - 1;
+      else if (index >= numPages) {
+        index = numPages - 1;
       }
       return index;
     };
 
 // Return the width of a given page.
     br.getPageWidth = function(index) {
-      return br.pageDims[clamp(index-1, br.pageDims)].w; // pageDims array is 0-based; it is populated by the $http request at the bottom
+      return br.pageDims[clamp(index, br.pageDims.length)].w; // pageDims array is populated by the $http request at the bottom
     };
 
 // Return the height of a given page.
     br.getPageHeight = function(index) {
-      return br.pageDims[clamp(index-1, br.pageDims)].h;
+      return br.pageDims[clamp(index, br.pageDims.length)].h;
     };
 
 // We load the images from archive.org -- you can modify this function to retrieve images
 // using a different URL structure
     br.getPageURI = function(index, reduce, rotate) {
-      return bookurl + index + '.jpg';
+      return bookurl + (index+1) + '.jpg';
     };
 
 // Return which side, left or right, that a given page should be displayed on
     br.getPageSide = function(index) {
-      if (1 == (index & 0x1)) {
+      if (0 == (index & 0x1)) {
         return 'R';
       } else {
         return 'L';
@@ -91,7 +91,7 @@ angular.module('bookreader')
 // For example, index 5 might correspond to "Page 1" if there is front matter such
 // as a title page and table of contents.
     br.getPageNum = function(index) {
-      return index;
+      return index+1;
     }
 
 // Total number of leafs
@@ -115,7 +115,7 @@ angular.module('bookreader')
      This method is needed to display the search results, but isn't defined in BookReader.js so define it here.
      */
     br.leafNumToIndex = function (leafNum) {
-      return leafNum;
+      return leafNum-1;
     };
 
 
@@ -131,7 +131,6 @@ angular.module('bookreader')
         }
       });
 
-      // TODO: Update this URL with the correct book ID
       var url = '/api/books/' + bookId + '/search?' +
         parts.map(function (o) {return o.k + '=' + encodeURIComponent(o.v);}).join('&');
 
