@@ -944,7 +944,7 @@ div.breakline{
   color: #FFFFFF;
 }
 
-#givenSrch, #surnameSrch, #yearStartSrch, #yearEndSrch {
+#givenSrch, #surnameSrch, #startYearSrch, #endYearSrch {
     width: 140px;
 }
 

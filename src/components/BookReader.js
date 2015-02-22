@@ -2774,8 +2774,8 @@ BookReader.prototype.search = function(term) {
 BookReader.prototype.fillSearchForm = function (query) {
   $('#givenSrch').val(query.given);
   $('#surnameSrch').val(query.surname);
-  $('#yearStartSrch').val(query.yearStart);
-  $('#yearEndSrch').val(query.yearEnd);
+  $('#startYearSrch').val(query.startYear);
+  $('#endYearSrch').val(query.endYear);
   $('#placeSrch').val(query.place);
   $('#relsSrch').val(query.rels);
 };
@@ -2793,8 +2793,8 @@ BookReader.prototype.customSearch = function (endpoint) {
   var query = {
     given: $('#givenSrch').val(),
     surname: $('#surnameSrch').val(),
-    yearStart: $('#yearStartSrch').val(),
-    yearEnd: $('#yearEndSrch').val(),
+    startYear: $('#startYearSrch').val(),
+    endYear: $('#endYearSrch').val(),
     place: $('#placeSrch').val(),
     rels: $('#relsSrch').val()
   };
@@ -3725,8 +3725,8 @@ BookReader.prototype.initToolbar = function(mode, ui) {
           "<input type='search' id='givenSrch' name='givenSrch' val='' placeholder='First Name'/>" +
           "<input type='search' id='surnameSrch' name='surnameSrch' val='' placeholder='Last Name'/>" +
           "<input type='search' id='placeSrch' name='placeSrch' val='' placeholder='Place'/><br>" +
-          "<input type='search' id='yearStartSrch' name='yearStartSrch' val='' placeholder='Start Year'/>" +
-          "<input type='search' id='yearEndSrch' name='yearEndSrch' val='' placeholder='End Year'/>" +
+          "<input type='search' id='startYearSrch' name='startYearSrch' val='' placeholder='Start Year'/>" +
+          "<input type='search' id='endYearSrch' name='endYearSrch' val='' placeholder='End Year'/>" +
           "<input type='search' id='relsSrch' name='relsSrch' val='' placeholder=\"Relatives' names\"/>" +
           "<button type='submit' id='btnSrch' name='btnSrch'>Search</button>" +
           "</form>"
