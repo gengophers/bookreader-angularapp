@@ -2774,11 +2774,10 @@ BookReader.prototype.search = function(term) {
 BookReader.prototype.fillSearchForm = function (query) {
   $('#givenSrch').val(query.given);
   $('#surnameSrch').val(query.surname);
-  $('#dateSrch').val(query.date);
+  $('#yearStartSrch').val(query.yearStart);
+  $('#yearEndSrch').val(query.yearEnd);
   $('#placeSrch').val(query.place);
-  $('#relSrch1').val(query.rel1);
-  $('#relSrch2').val(query.rel2);
-  $('#relSrch3').val(query.rel3);
+  $('#relsSrch').val(query.rels);
 };
 
   /**
@@ -2794,11 +2793,10 @@ BookReader.prototype.customSearch = function (endpoint) {
   var query = {
     given: $('#givenSrch').val(),
     surname: $('#surnameSrch').val(),
-    date: $('#dateSrch').val(),
+    yearStart: $('#yearStartSrch').val(),
+    yearEnd: $('#yearEndSrch').val(),
     place: $('#placeSrch').val(),
-    rel1: $('#relSrch1').val(),
-    rel2: $('#relSrch2').val(),
-    rel3: $('#relSrch3').val()
+    rels: $('#relsSrch').val()
   };
 
   // Build the URL to the search endpoint using the registered method
@@ -2815,6 +2813,9 @@ BookReader.prototype.customSearch = function (endpoint) {
 
   $.ajax({url: url, dataType: 'json', success: function(results) {
       console.log('customSearch', results);
+      if (results.matches == null) {
+        results.matches = [];
+      }
       // convert boxes from page dimensions to image dimensions
       for (var i = 0, leni = results.matches.length; i < leni; i++) {
           var match = results.matches[i];
@@ -3723,11 +3724,10 @@ BookReader.prototype.initToolbar = function(mode, ui) {
         +     "<form action='javascript:br.customSearch();' id='booksearch'>" +
           "<input type='search' id='givenSrch' name='givenSrch' val='' placeholder='First Name'/>" +
           "<input type='search' id='surnameSrch' name='surnameSrch' val='' placeholder='Last Name'/>" +
-          "<input type='search' id='dateSrch' name='dateSrch' val='' placeholder='Date'/>" +
           "<input type='search' id='placeSrch' name='placeSrch' val='' placeholder='Place'/><br>" +
-          "<input type='search' id='relSrch1' name='relSrch1' val='' placeholder=\"Relative's name\"/>" +
-          "<input type='search' id='relSrch2' name='relSrch2' val='' placeholder=\"Relative's name\"/>" +
-          "<input type='search' id='relSrch3' name='relSrch3' val='' placeholder=\"Relative's name\"/>" +
+          "<input type='search' id='yearStartSrch' name='yearStartSrch' val='' placeholder='Start Year'/>" +
+          "<input type='search' id='yearEndSrch' name='yearEndSrch' val='' placeholder='End Year'/>" +
+          "<input type='search' id='relsSrch' name='relsSrch' val='' placeholder=\"Relatives' names\"/>" +
           "<button type='submit' id='btnSrch' name='btnSrch'>Search</button>" +
           "</form>"
         //+     "<button class='BRicon play'></button>"

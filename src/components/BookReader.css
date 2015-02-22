@@ -944,10 +944,10 @@ div.breakline{
   color: #FFFFFF;
 }
 
-#givenSrch, #surnameSrch, #dateSrch{
+#givenSrch, #surnameSrch, #yearStartSrch, #yearEndSrch {
     width: 140px;
 }
 
-#placeSrch, #relSrch1, #relSrch2, #relSrch3{
+#placeSrch, #relsSrch {
     width: 217px;
 }
